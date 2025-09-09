@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+</head>
+<body>
+    <h1>Lista de Usuários</h1>
+
+    {% if users %}
+        <ul>
+            {% for user in users %}
+                <li>
+                    <strong>{{ user.name }} - {{ user.email }}</strong>
+                    {% if user.tasks %}
+                        <ul>
+                            {% for task in user.tasks %}
+                                <li>
+                                    <b>Título:</b> {{ task.title }} |
+                                    <b>Descrição:</b> {{ task.description }} |
+                                    <b>Status:</b> {{ task.status }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <em>Sem tarefas.</em>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum usuário cadastrado ainda.</p>
+    {% endif %}
+
+    <a href="{{ url_for('contact') }}">➕ Cadastrar Novo Usuário</a>
+    <a href="{{ url_for('list_tasks') }}">📋 Ver Tarefas</a>
+    <a href="{{ url_for('create_task') }}">➕ Criar Nova Tarefa</a>
+
+</body>
+</html>
